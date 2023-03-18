@@ -1,0 +1,145 @@
+% !TEX encoding = UTF-8
+
+\documentclass[a4paper, 12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+
+\begin{document}
+
+\title{%
+    \normalfont \normalsize %
+    \Large\textsc{Università degli Studi di Verona} \\ %
+    {Dipartimento di Informatica} \\ [25pt] %
+    \rule{\linewidth}{0.5pt} \\ [0.4cm] %
+    \huge Elaborazioni di Segnali ed Immagini \\ %
+    \Large Sviluppo di un algoritmo per il riconscimento delle canzoni
+    \rule{\linewidth}{2pt} \\ [0.5cm] %
+}
+\author{Nicolò Lutteri \and Damian Mastroiacovo \and Luigi Capogrosso}
+\date{\today}
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Specifiche del progetto}
+\begin{itemize}
+\item \textbf{Obiettivi}: in generale, l'idea è quella di sviluppare il codice visto a lezione sul tema in oggetto, ed in particolare si articola nei seguenti sotto-obiettivi:
+\begin{enumerate}
+\item Individuare un numero di casi di studio elevato (20 almeno) dove applicare, variando i parametri del codice visto a lezione;
+\item Grazie all'analisi di cui al punto precedente, l'idea è di capire quali condizioni di acquisizione non permettono una buona accuratezza (= numero di casi giusti/numero di casi totali);
+\item Capire come vari l'andamento dell'accuratezza al variare della lunghezza del segmento di test.
+\end{enumerate}
+\item Come prendere il massimo dei voti:
+\begin{enumerate}
+\item Riuscendo a sviluppare tutti i sotto obiettivi;
+\item Considerando esempi di canzoni diverse tra loro e non troppo simili a quelle viste in aula.
+\end{enumerate}
+\end{itemize}
+
+\section{Scopo di questo documento}
+Lo scopo che si prefigge questo docuemento è quello di spiegare come il progetto è stato implementato, in particolare, la finalità è quella di mostrare come sono stati sviluppati tutti i sotto obiettivi illustrando tutti i test svolti.
+
+\section{Sotto-obiettivo 1}
+\emph{Individuare un numero di casi di studio elevato (20 almeno) dove applicare, variando i parametri del codice visto a lezione}. \\
+
+Per la creazione dei casi d'uso, la nostra gestione è stata la seguente:
+\begin{itemize}
+\item Nella cartella \verb|Rumore/| abbiamo inserito 10 file \verb|.mp3| che simulano un disturbo (applausi, bambino che piange, ambulanza, ecc\dots{});
+\item Nella cartella \verb|Libreria/| abbiamo inserito 20 file \verb|.mp3| che risultano, invece, essere canzoni di differenti generi (rock, pop, jaz, latino, ecc\dots{}).
+\end{itemize}
+Ogni audio contenuto in \verb|Rumore/| è stato sommato con tutte le canzoni contenute in \verb|Libreria/|, generando così un nuovo segnale, poi, tagliato a 1 2 3 4 5 6 7 8 9 10 secondi. \\
+In totale i casi creati dovrebbero quindi essere: $10*20*10=2000$. \\
+Nel nostro caso specifico però, questi, sono esattamente \textbf{780}, poiché, nella funzione \verb|SommaSegnali.m| abbiamo fatto dei controlli preventivi prima della somma di \verb|S1| ed \verb|S2|.
+Tutti i file sono stati poi salvati nella cartella \verb|Casi/| atraverso codice \verb|Matlab|.
+
+\section{Sotto-obiettivo 2}
+\emph{Grazie all'analisi di cui al punto precedente, l'idea è di capire quali condizioni di acquisizione non permettono una buona accuratezza (= numero di casi giusti/numero di casi totali)}. \\
+
+I risultati da noi ottenuti sono:
+\begin{itemize}
+\item \textbf{Lunghezza 1}:
+\begin{itemize}
+\item Totali: 180
+\item Giusti: 54
+\item Sbagliati: 126	
+\item Rapporto: 30\%
+\end{itemize}
+\item \textbf{Lunghezza 2}:
+\begin{itemize}
+\item Totali: 180
+\item Giusti: 88
+\item Sbagliati: 92
+\item Rapporto: 48\%
+\end{itemize}
+\item \textbf{Lunghezza 3}:
+\begin{itemize}
+\item Totali: 100
+\item Giusti: 68
+\item Sbagliati: 32
+\item Rapporto: 68\%
+\end{itemize}
+
+\newpage
+
+\item \textbf{Lunghezza 4}:
+\begin{itemize}
+\item Totali: 80
+\item Giusti: 59
+\item Sbagliati: 21
+\item Rapporto: 73\%
+\end{itemize}
+\item \textbf{Lunghezza 5}:
+\begin{itemize}
+\item Totali: 80
+\item Giusti: 59
+\item Sbagliati: 21
+\item Rapporto: 73\%
+\end{itemize}
+\item \textbf{Lunghezza 6}:
+\begin{itemize}
+\item Totali: 40
+\item Giusti: 32
+\item Sbagliati: 8
+\item Rapporto: 80\%
+\end{itemize}
+\item \textbf{Lunghezza 7}:
+\begin{itemize}
+\item Totali: 40
+\item Giusti: 32
+\item Sbagliati: 8
+\item Rapporto: 80\%
+\end{itemize}
+\item \textbf{Lunghezza 8}:
+\begin{itemize}
+\item Totali: 40
+\item Giusti: 34 
+\item Sbagliati: 6
+\item Rapporto: 85\%
+\end{itemize}
+\item \textbf{Lunghezza 9}:
+\begin{itemize}
+\item Totali: 20
+\item Giusti: 16
+\item Sbagliati: 4
+\item Rapporto: 80\%
+\end{itemize}
+\item \textbf{Lunghezza 10}:
+\begin{itemize}
+\item Totali: 20
+\item Giusti: 16
+\item Sbagliati: 4
+\item Rapporto: 80\%
+\end{itemize}
+\end{itemize}
+
+\section{Sotto-obiettivo 3}
+\emph{Capire come vari l'andamento dell'accuratezza al variare della lunghezza del segmento di test}. \\
+
+I nostri test mostrano che l'andamento dell'accuratezza al variare della lunghezza del segmento aumenta. Difatti, con una lunghezza del segmento pari a \textbf{2 secondi}, abbiamo una percentaule di casi corretti del \textbf{48\%}, mentre, con una lunghezza pari a \textbf{10 secondi} il rapporto risulta essere del \textbf{80\%}. \\
+
+Questo a dimostrazione del fatto che, l'accuratezza aumenta all'aumentare della lunghezza del segmento di test, risultato in linea con ciò che noi ci aspettavamo.
+
+\end{document}
